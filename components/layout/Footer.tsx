@@ -74,16 +74,16 @@ export default function Footer() {
                 <Mail className="h-4 w-4 flex-shrink-0" />
                 <span>erwema@brg.co.rw</span>
               </a>
-              <a href="tel:+25078832372" className="flex items-center space-x-2 text-sm hover:text-[var(--brg-brass)] transition-colors">
+              <a href="tel:+250786291710" className="flex items-center space-x-2 text-sm hover:text-[var(--brg-brass)] transition-colors">
                 <Phone className="h-4 w-4 flex-shrink-0" />
-                <span>+250 788 323 72</span>
+                <span>+250 786 291 710</span>
               </a>
               <div className="flex items-center space-x-2 text-sm text-white/60">
                 <MapPin className="h-4 w-4 flex-shrink-0" />
                 <span>Rwanda</span>
               </div>
               <a 
-                href="https://wa.me/25078832372" 
+                href="https://wa.me/250786291710" 
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center space-x-2 px-4 py-2 bg-[#25D366] text-white rounded-lg hover:bg-[#1ebe5c] transition-colors text-sm"
