@@ -6,7 +6,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Suspense, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
-import { ArrowLeft, CheckCircle2, MessageCircle, Package } from 'lucide-react'
+import { ArrowLeft, CheckCircle2, Mail, MessageCircle, Package } from 'lucide-react'
 
 const products = [
   {
@@ -41,6 +41,30 @@ const products = [
   },
 ]
 
+const QUOTE_EMAIL = 'enockdev01@gmail.com'
+const QUOTE_WHATSAPP = '250786291710' // 0786291710 in international format
+
+function buildQuoteMessage(formData: {
+  name: string
+  email: string
+  phone: string
+  packaging: string
+  quantity: string
+  message: string
+}, productName: string) {
+  return [
+    'New Quote Request - Nzuri Foods',
+    '',
+    `Name: ${formData.name || '-'}`,
+    `Email: ${formData.email || '-'}`,
+    `Phone: ${formData.phone || '-'}`,
+    `Product: ${productName || '-'}`,
+    `Packaging: ${formData.packaging || '-'}`,
+    `Estimated Quantity: ${formData.quantity || '-'}`,
+    `Additional Details: ${formData.message || '-'}`,
+  ].join('\n')
+}
+
 function QuoteForm() {
   const searchParams = useSearchParams()
   const productParam = searchParams.get('product')
@@ -57,14 +81,21 @@ function QuoteForm() {
     message: '',
   })
 
+  const activeProduct = products.find((p) => p.id === formData.product)
+
+  const quoteMessage = buildQuoteMessage(formData, activeProduct?.name || '')
+  const whatsappLink = `https://wa.me/${QUOTE_WHATSAPP}?text=${encodeURIComponent(quoteMessage)}`
+  const mailtoLink = `mailto:${QUOTE_EMAIL}?subject=${encodeURIComponent(
+    `Quote Request - ${activeProduct?.name || 'Product'}`
+  )}&body=${encodeURIComponent(quoteMessage)}`
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    // Handle form submission - will connect to API later
-    console.log('Quote request submitted:', formData)
+    // No backend yet - open WhatsApp with the request pre-filled so it sends
+    // immediately, and reveal the email fallback on the confirmation screen.
+    window.open(whatsappLink, '_blank', 'noopener,noreferrer')
     setSubmitted(true)
   }
-
-  const activeProduct = products.find((p) => p.id === formData.product)
 
   if (submitted) {
     return (
@@ -78,30 +109,37 @@ function QuoteForm() {
           >
             <CheckCircle2 className="h-14 w-14 text-[var(--brg-sage)] mx-auto mb-4" />
             <h1 className="font-display text-3xl font-bold text-[var(--brg-ink)] mb-2">
-              Request Received
+              Almost Done
             </h1>
             <p className="text-gray-600 mb-8">
-              Thanks for your interest{formData.name ? `, ${formData.name}` : ''}. Our sales
-              team will get back to you shortly with pricing and availability
-              {activeProduct ? ` for ${activeProduct.name}` : ''}.
+              Thanks for your interest{formData.name ? `, ${formData.name}` : ''}. Tap a button
+              below to send your request{activeProduct ? ` for ${activeProduct.name}` : ''} — it
+              opens with everything already filled in, just hit send.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Link
-                href="/products"
-                className="inline-flex items-center justify-center px-6 py-3 bg-[var(--brg-sage)] hover:bg-[var(--brg-sage-dark)] text-white font-semibold rounded-lg transition-colors"
-              >
-                Back to Products
-              </Link>
-              <Link
-                href="https://wa.me/25078832372"
+                href={whatsappLink}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center px-6 py-3 bg-[#25D366] hover:bg-[#1ebe5c] text-white font-semibold rounded-lg transition-colors"
               >
                 <MessageCircle className="h-5 w-5 mr-2" />
-                Chat on WhatsApp
+                Send via WhatsApp
+              </Link>
+              <Link
+                href={mailtoLink}
+                className="inline-flex items-center justify-center px-6 py-3 bg-[var(--brg-brass)] hover:bg-[var(--brg-brass)]/80 text-white font-semibold rounded-lg transition-colors"
+              >
+                <Mail className="h-5 w-5 mr-2" />
+                Send via Email
               </Link>
             </div>
+            <Link
+              href="/products"
+              className="inline-flex items-center justify-center mt-6 text-sm text-gray-500 hover:text-[var(--brg-brass)] transition-colors"
+            >
+              Back to Products
+            </Link>
           </motion.div>
         </div>
       </section>
