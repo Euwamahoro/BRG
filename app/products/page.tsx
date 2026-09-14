@@ -8,69 +8,69 @@ import { ArrowRight, Package, Scale, Ruler, ShoppingBag } from 'lucide-react'
 
 const beanProducts = [
   {
-    id: 'yellow-beans',
-    name: 'Yellow Beans',
-    description: 'Premium yellow beans with excellent cooking quality. High in protein and fiber.',
-    image: '/images/products/yellow-beans.jpg',
+    id: 'beans',
+    name: 'Beans',
+    description: 'Premium Rwandan beans with excellent cooking quality. High in protein and fiber.',
+    image: '/images/products/beans.jpg',
     specifications: {
       moisture: '≤ 14%',
       purity: '≥ 99%',
       foreignMatter: '≤ 0.5%',
     },
-    packaging: ['25kg', '50kg', 'Bulk'],
-    certifications: ['HACCP Compliant'],
+    packaging: ['1kg', '25kg', '50kg', 'Bulk'],
+    certifications: ['100% Natural'],
   },
   {
-    id: 'sugar-beans',
-    name: 'Sugar Beans (Rosecoco)',
-    description: 'Popular rosecoco variety with a sweet flavor. Perfect for soups and stews.',
-    image: '/images/products/sugar-beans.jpg',
+    id: 'peeled-banana',
+    name: 'Peeled Banana',
+    description: 'Fresh, ready-to-cook peeled banana. Natural, nutritious, and convenient.',
+    image: '/images/products/peeled-banana.jpg',
     specifications: {
-      moisture: '≤ 14%',
-      purity: '≥ 99%',
-      foreignMatter: '≤ 0.5%',
+      moisture: 'Fresh',
+      purity: '100% Natural',
+      foreignMatter: 'Ready to Cook',
     },
-    packaging: ['25kg', '50kg', 'Bulk'],
-    certifications: ['HACCP Compliant'],
+    packaging: ['1kg', 'Bulk'],
+    certifications: ['100% Natural'],
   },
   {
-    id: 'red-kidney',
-    name: 'Red Kidney Beans',
-    description: 'Rich, dark red beans ideal for chili and salads. High in antioxidants.',
-    image: '/images/products/red-kidney.jpg',
+    id: 'banana-plantain',
+    name: 'Banana Plantain',
+    description: 'Fresh, natural plantain rich in carbohydrates and a great source of vitamins and minerals.',
+    image: '/images/products/banana-plantain.jpg',
     specifications: {
-      moisture: '≤ 14%',
-      purity: '≥ 99%',
-      foreignMatter: '≤ 0.5%',
+      moisture: 'Fresh',
+      purity: 'Rich in Carbohydrates',
+      foreignMatter: 'Source of Vitamins & Minerals',
     },
-    packaging: ['25kg', '50kg', 'Bulk'],
-    certifications: ['HACCP Compliant'],
+    packaging: ['10kg', 'Bulk'],
+    certifications: ['Good for Heart Health'],
   },
   {
-    id: 'black-beans',
-    name: 'Black Beans',
-    description: 'Nutrient-dense black beans with a mild, earthy flavor. Popular in Latin cuisine.',
-    image: '/images/products/black-beans.jpg',
+    id: 'dagaa-dried-fish',
+    name: 'Dagaa (Dried Small Fish)',
+    description: 'Naturally dried small fish, rich in protein and a great source of Omega 3.',
+    image: '/images/products/dagaa-dried-fish.jpg',
     specifications: {
-      moisture: '≤ 14%',
-      purity: '≥ 99%',
-      foreignMatter: '≤ 0.5%',
+      moisture: 'Sun-Dried',
+      purity: 'Rich in Protein',
+      foreignMatter: 'Source of Omega 3',
     },
-    packaging: ['25kg', '50kg', 'Bulk'],
-    certifications: ['HACCP Compliant'],
+    packaging: ['2kg', 'Bulk'],
+    certifications: ['Good for Heart Health'],
   },
   {
-    id: 'red-speckled',
-    name: 'Red Speckled Beans',
-    description: 'Distinctive speckled beans with a rich, nutty flavor. Excellent for various dishes.',
-    image: '/images/products/red-speckled.jpg',
+    id: 'sweet-potatoes',
+    name: 'Sweet Potatoes',
+    description: 'Fresh, natural sweet potatoes packed with nutrients and great for your health.',
+    image: '/images/products/sweet-potatoes.jpg',
     specifications: {
-      moisture: '≤ 14%',
-      purity: '≥ 99%',
-      foreignMatter: '≤ 0.5%',
+      moisture: 'Fresh',
+      purity: '100% Natural',
+      foreignMatter: 'Rich in Nutrients',
     },
-    packaging: ['25kg', '50kg', 'Bulk'],
-    certifications: ['HACCP Compliant'],
+    packaging: ['10kg', 'Bulk'],
+    certifications: ['Good for Your Health'],
   },
 ]
 
@@ -112,16 +112,14 @@ export default function ProductsPage() {
                 viewport={{ once: true }}
                 className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-[var(--brg-sage-light)] hover:border-[var(--brg-sage)]"
               >
-                {/* Product Image Placeholder */}
-                <div className="relative h-48 bg-[var(--brg-sage-light)] flex items-center justify-center">
-                  <div className="text-6xl opacity-30">🫘</div>
-                  {/* Uncomment when images are available */}
-                  {/* <Image
+                {/* Product Image */}
+                <div className="relative h-48 bg-[var(--brg-sage-light)]">
+                  <Image
                     src={product.image}
                     alt={product.name}
                     fill
                     className="object-cover"
-                  /> */}
+                  />
                 </div>
                 
                 <div className="p-6">
