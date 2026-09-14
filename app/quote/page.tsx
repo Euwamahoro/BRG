@@ -6,7 +6,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Suspense, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
-import { ArrowLeft, CheckCircle2, Mail, MessageCircle, Package } from 'lucide-react'
+import { ArrowLeft, CheckCircle2, MessageCircle, Package } from 'lucide-react'
 
 const products = [
   {
@@ -41,7 +41,6 @@ const products = [
   },
 ]
 
-const QUOTE_EMAIL = 'enockdev01@gmail.com'
 const QUOTE_WHATSAPP = '250786291710' // 0786291710 in international format
 
 function buildQuoteMessage(formData: {
@@ -71,6 +70,8 @@ function QuoteForm() {
   const selectedProduct = products.find((p) => p.id === productParam)
 
   const [submitted, setSubmitted] = useState(false)
+  const [sending, setSending] = useState(false)
+  const [sendError, setSendError] = useState('')
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -85,16 +86,39 @@ function QuoteForm() {
 
   const quoteMessage = buildQuoteMessage(formData, activeProduct?.name || '')
   const whatsappLink = `https://wa.me/${QUOTE_WHATSAPP}?text=${encodeURIComponent(quoteMessage)}`
-  const mailtoLink = `mailto:${QUOTE_EMAIL}?subject=${encodeURIComponent(
-    `Quote Request - ${activeProduct?.name || 'Product'}`
-  )}&body=${encodeURIComponent(quoteMessage)}`
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // No backend yet - open WhatsApp with the request pre-filled so it sends
-    // immediately, and reveal the email fallback on the confirmation screen.
-    window.open(whatsappLink, '_blank', 'noopener,noreferrer')
-    setSubmitted(true)
+    setSendError('')
+    setSending(true)
+    try {
+      const res = await fetch('/api/send-quote', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          productName: activeProduct?.name || '',
+          packaging: formData.packaging,
+          quantity: formData.quantity,
+          message: formData.message,
+        }),
+      })
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}))
+        throw new Error(data.error || 'Failed to send request.')
+      }
+      setSubmitted(true)
+    } catch (err) {
+      setSendError(
+        err instanceof Error
+          ? err.message
+          : 'Something went wrong sending your request. Please try WhatsApp instead.'
+      )
+    } finally {
+      setSending(false)
+    }
   }
 
   if (submitted) {
@@ -109,12 +133,13 @@ function QuoteForm() {
           >
             <CheckCircle2 className="h-14 w-14 text-[var(--brg-sage)] mx-auto mb-4" />
             <h1 className="font-display text-3xl font-bold text-[var(--brg-ink)] mb-2">
-              Almost Done
+              Request Sent
             </h1>
             <p className="text-gray-600 mb-8">
-              Thanks for your interest{formData.name ? `, ${formData.name}` : ''}. Tap a button
-              below to send your request{activeProduct ? ` for ${activeProduct.name}` : ''} — it
-              opens with everything already filled in, just hit send.
+              Thanks for your interest{formData.name ? `, ${formData.name}` : ''}. Your request
+              {activeProduct ? ` for ${activeProduct.name}` : ''} has been emailed to our sales
+              team and they'll get back to you shortly. You can also reach us directly on
+              WhatsApp below.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Link
@@ -124,22 +149,15 @@ function QuoteForm() {
                 className="inline-flex items-center justify-center px-6 py-3 bg-[#25D366] hover:bg-[#1ebe5c] text-white font-semibold rounded-lg transition-colors"
               >
                 <MessageCircle className="h-5 w-5 mr-2" />
-                Send via WhatsApp
+                Chat on WhatsApp
               </Link>
               <Link
-                href={mailtoLink}
-                className="inline-flex items-center justify-center px-6 py-3 bg-[var(--brg-brass)] hover:bg-[var(--brg-brass)]/80 text-white font-semibold rounded-lg transition-colors"
+                href="/products"
+                className="inline-flex items-center justify-center px-6 py-3 bg-[var(--brg-sage)] hover:bg-[var(--brg-sage-dark)] text-white font-semibold rounded-lg transition-colors"
               >
-                <Mail className="h-5 w-5 mr-2" />
-                Send via Email
+                Back to Products
               </Link>
             </div>
-            <Link
-              href="/products"
-              className="inline-flex items-center justify-center mt-6 text-sm text-gray-500 hover:text-[var(--brg-brass)] transition-colors"
-            >
-              Back to Products
-            </Link>
           </motion.div>
         </div>
       </section>
@@ -336,11 +354,27 @@ function QuoteForm() {
                     />
                   </div>
 
+                  {sendError && (
+                    <div className="px-4 py-3 rounded-lg bg-red-50 border border-red-200 text-red-700 text-sm">
+                      {sendError} You can also{' '}
+                      <Link
+                        href={whatsappLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="underline font-medium"
+                      >
+                        message us on WhatsApp
+                      </Link>
+                      .
+                    </div>
+                  )}
+
                   <button
                     type="submit"
-                    className="w-full px-8 py-3 bg-[var(--brg-brass)] hover:bg-[var(--brg-brass)]/80 text-white font-semibold rounded-lg transition-colors"
+                    disabled={sending}
+                    className="w-full px-8 py-3 bg-[var(--brg-brass)] hover:bg-[var(--brg-brass)]/80 disabled:opacity-60 disabled:cursor-not-allowed text-white font-semibold rounded-lg transition-colors"
                   >
-                    Submit Quote Request
+                    {sending ? 'Sending...' : 'Submit Quote Request'}
                   </button>
                 </form>
               </div>
