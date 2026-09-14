@@ -60,7 +60,7 @@ export default function Header() {
             {/* CTA Buttons */}
             <div className="flex items-center space-x-3">
               <Link 
-                href="https://wa.me/25078832372" 
+                href="https://wa.me/250786291710" 
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center space-x-2 px-3 py-2 bg-[#25D366] text-white rounded-lg hover:bg-[#1ebe5c] transition-colors text-sm"
@@ -176,7 +176,7 @@ export default function Header() {
               {/* Mobile CTA */}
               <div className="mt-4 space-y-2">
                 <Link 
-                  href="https://wa.me/25078832372" 
+                  href="https://wa.me/250786291710" 
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center space-x-2 px-4 py-3 bg-[#25D366] text-white rounded-lg transition-colors w-full"
