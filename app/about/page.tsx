@@ -155,9 +155,9 @@ export default function AboutPage() {
                   <Mail className="h-4 w-4" />
                   <span>erwema@brg.co.rw</span>
                 </a>
-                <a href="tel:+25078832372" className="flex items-center justify-center space-x-2 text-gray-600 hover:text-[var(--brg-brass)] transition-colors">
+                <a href="tel:+250786291710" className="flex items-center justify-center space-x-2 text-gray-600 hover:text-[var(--brg-brass)] transition-colors">
                   <Phone className="h-4 w-4" />
-                  <span>+250 788 323 72</span>
+                  <span>+250 786 291 710</span>
                 </a>
                 <div className="flex items-center justify-center space-x-2 text-gray-600">
                   <MapPin className="h-4 w-4" />
