@@ -72,8 +72,8 @@ export default function ContactPage() {
                   <Phone className="h-5 w-5 text-[var(--brg-brass)] mt-1" />
                   <div>
                     <p className="font-medium text-[var(--brg-ink)]">Phone</p>
-                    <a href="tel:+25078832372" className="text-gray-600 hover:text-[var(--brg-brass)] transition-colors">
-                      +250 788 323 72
+                    <a href="tel:+250786291710" className="text-gray-600 hover:text-[var(--brg-brass)] transition-colors">
+                      +250 786 291 710
                     </a>
                   </div>
                 </div>
@@ -83,7 +83,7 @@ export default function ContactPage() {
                   <div>
                     <p className="font-medium text-[var(--brg-ink)]">WhatsApp</p>
                     <a 
-                      href="https://wa.me/25078832372" 
+                      href="https://wa.me/250786291710" 
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-gray-600 hover:text-[var(--brg-brass)] transition-colors"
@@ -104,7 +104,7 @@ export default function ContactPage() {
 
               {/* WhatsApp Floating Button - Quick Access */}
               <Link
-                href="https://wa.me/25078832372"
+                href="https://wa.me/250786291710"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center px-6 py-3 bg-[#25D366] text-white font-semibold rounded-lg hover:bg-[#1ebe5c] transition-colors w-full justify-center"
