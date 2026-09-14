@@ -86,6 +86,15 @@ export default function ProductsPage() {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto text-center"
           >
+            <div className="relative w-24 h-24 mx-auto mb-4">
+              <Image
+                src="/images/nzuri-logo.jpeg"
+                alt="Nzuri Foods"
+                fill
+                className="object-contain rounded-xl"
+                priority
+              />
+            </div>
             <h1 className="font-display text-4xl md:text-5xl font-bold text-[var(--brg-ink)]">
               Nzuri Foods
             </h1>
@@ -113,12 +122,13 @@ export default function ProductsPage() {
                 className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-[var(--brg-sage-light)] hover:border-[var(--brg-sage)]"
               >
                 {/* Product Image */}
-                <div className="relative h-48 bg-[var(--brg-sage-light)]">
+                <div className="relative h-72 bg-[var(--brg-sage-light)] p-4">
                   <Image
                     src={product.image}
                     alt={product.name}
                     fill
-                    className="object-cover"
+                    className="object-contain"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
                 </div>
                 
