@@ -2,7 +2,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Mail, Phone, MapPin, MessageCircle, Clock } from 'lucide-react'
+import { Mail, Phone, MapPin, MessageCircle, Clock, CheckCircle2 } from 'lucide-react'
 import Link from 'next/link'
 import { useState } from 'react'
 
@@ -13,11 +13,35 @@ export default function ContactPage() {
     subject: '',
     message: '',
   })
+  const [sending, setSending] = useState(false)
+  const [sendError, setSendError] = useState('')
+  const [submitted, setSubmitted] = useState(false)
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Handle form submission - will connect to API later
-    console.log('Form submitted:', formData)
+    setSendError('')
+    setSending(true)
+    try {
+      const res = await fetch('/api/send-contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      })
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}))
+        throw new Error(data.error || 'Failed to send message.')
+      }
+      setSubmitted(true)
+      setFormData({ name: '', email: '', subject: '', message: '' })
+    } catch (err) {
+      setSendError(
+        err instanceof Error
+          ? err.message
+          : 'Something went wrong sending your message. Please try WhatsApp instead.'
+      )
+    } finally {
+      setSending(false)
+    }
   }
 
   return (
@@ -126,7 +150,24 @@ export default function ContactPage() {
                 <h3 className="font-display text-2xl font-bold text-[var(--brg-ink)] mb-6">
                   Send a Message
                 </h3>
-                
+
+                {submitted ? (
+                  <div className="text-center py-10">
+                    <CheckCircle2 className="h-12 w-12 text-[var(--brg-sage)] mx-auto mb-4" />
+                    <h4 className="font-display text-xl font-bold text-[var(--brg-ink)] mb-2">
+                      Message Sent
+                    </h4>
+                    <p className="text-gray-600 mb-6">
+                      Thanks for reaching out — we&apos;ll get back to you shortly.
+                    </p>
+                    <button
+                      onClick={() => setSubmitted(false)}
+                      className="text-sm font-medium text-[var(--brg-brass)] hover:underline"
+                    >
+                      Send another message
+                    </button>
+                  </div>
+                ) : (
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
@@ -185,13 +226,30 @@ export default function ContactPage() {
                     />
                   </div>
 
+                  {sendError && (
+                    <div className="px-4 py-3 rounded-lg bg-red-50 border border-red-200 text-red-700 text-sm">
+                      {sendError} You can also{' '}
+                      <Link
+                        href="https://wa.me/250786291710"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="underline font-medium"
+                      >
+                        message us on WhatsApp
+                      </Link>
+                      .
+                    </div>
+                  )}
+
                   <button
                     type="submit"
-                    className="w-full px-8 py-3 bg-[var(--brg-sage)] hover:bg-[var(--brg-sage-dark)] text-white font-semibold rounded-lg transition-colors"
+                    disabled={sending}
+                    className="w-full px-8 py-3 bg-[var(--brg-sage)] hover:bg-[var(--brg-sage-dark)] disabled:opacity-60 disabled:cursor-not-allowed text-white font-semibold rounded-lg transition-colors"
                   >
-                    Send Message
+                    {sending ? 'Sending...' : 'Send Message'}
                   </button>
                 </form>
+                )}
               </div>
             </motion.div>
           </div>
