@@ -8,28 +8,28 @@ import { motion, AnimatePresence } from 'framer-motion'
 const heroImages = [
   {
     id: 1,
-    src: '/images/hero/beans-harvest.jpg',
-    alt: 'Fresh Nzuri Beans harvest in Rwanda',
+    src: '/images/products/beans.jpg',
+    alt: 'Nzuri Foods premium beans, 1kg pack',
   },
   {
     id: 2,
-    src: '/images/hero/farmers-cooperative.jpg',
-    alt: 'Rwandan farmers working together',
+    src: '/images/products/banana-plantain.jpg',
+    alt: 'Nzuri Foods fresh banana plantain, 10kg box',
   },
   {
     id: 3,
-    src: '/images/hero/export-shipping.jpg',
-    alt: 'BRG export shipments to Europe',
+    src: '/images/products/peeled-banana.jpg',
+    alt: 'Nzuri Foods ready-to-cook peeled banana, 1kg pack',
   },
   {
     id: 4,
-    src: '/images/hero/quality-control.jpg',
-    alt: 'Quality control at BRG facilities',
+    src: '/images/products/sweet-potatoes.jpg',
+    alt: 'Nzuri Foods fresh sweet potatoes, 10kg box',
   },
   {
     id: 5,
-    src: '/images/hero/cooperative-meeting.jpg',
-    alt: 'Farmer cooperative meeting',
+    src: '/images/products/dagaa-dried-fish.jpg',
+    alt: 'Nzuri Foods dried dagaa fish, 2kg pack',
   },
 ]
 
