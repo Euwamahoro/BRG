@@ -103,21 +103,6 @@ export default function ContactPage() {
                 </div>
 
                 <div className="flex items-start space-x-4 p-4 bg-[var(--brg-cream)] rounded-xl">
-                  <MessageCircle className="h-5 w-5 text-[var(--brg-brass)] mt-1" />
-                  <div>
-                    <p className="font-medium text-[var(--brg-ink)]">WhatsApp</p>
-                    <a 
-                      href="https://wa.me/250786291710" 
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-gray-600 hover:text-[var(--brg-brass)] transition-colors"
-                    >
-                      Chat with us
-                    </a>
-                  </div>
-                </div>
-
-                <div className="flex items-start space-x-4 p-4 bg-[var(--brg-cream)] rounded-xl">
                   <MapPin className="h-5 w-5 text-[var(--brg-brass)] mt-1" />
                   <div>
                     <p className="font-medium text-[var(--brg-ink)]">Location</p>

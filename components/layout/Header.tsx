@@ -32,6 +32,9 @@ export default function Header() {
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-8">
             <div className="flex space-x-6">
+              <Link href="/" className="text-gray-600 hover:text-[var(--brg-brass)] transition-colors font-medium">
+                Home
+              </Link>
               <Dropdown 
                 label="Business" 
                 icon={Building2}
@@ -91,6 +94,13 @@ export default function Header() {
         {isOpen && (
           <div className="lg:hidden py-4 border-t border-[var(--brg-sage-light)] bg-white">
             <div className="flex flex-col space-y-1">
+              <Link
+                href="/"
+                className="px-4 py-3 hover:bg-[var(--brg-sage-light)] rounded-lg transition-colors"
+                onClick={() => setIsOpen(false)}
+              >
+                <p className="font-medium text-[var(--brg-ink)]">Home</p>
+              </Link>
               {/* Business Section */}
               <div className="px-4 py-2">
                 <p className="text-xs font-semibold text-[var(--brg-brass)] uppercase tracking-wider">Business</p>
