@@ -46,7 +46,7 @@ If `RESEND_API_KEY` isn't set, both forms show an error message with a WhatsApp 
 
 ## Contact Details
 
-Phone / WhatsApp number used across the site (Header, Footer, About, Contact, Quote): `+250 786 291 710`.
+Phone / WhatsApp number used across the site (Header, Footer, About, Contact, Quote): `+250 788 323 725`.
 
 ## Deployment
 

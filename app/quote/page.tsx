@@ -41,7 +41,7 @@ const products = [
   },
 ]
 
-const QUOTE_WHATSAPP = '250786291710' // 0786291710 in international format
+const QUOTE_WHATSAPP = '250788323725' // 0788323725 in international format
 
 function buildQuoteMessage(formData: {
   name: string
